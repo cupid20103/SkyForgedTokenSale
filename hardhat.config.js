@@ -66,7 +66,7 @@ module.exports = {
       accounts: [`0x${PRIVATE_KEY}`],
     },
     base_sepolia: {
-      url: "https://sepolia.base.org",
+      url: "https://base-sepolia.blockpi.network/v1/rpc/public",
       chainId: 84532,
       gasPrice: 2000000000,
       accounts: [`0x${PRIVATE_KEY}`],

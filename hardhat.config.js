@@ -8,6 +8,10 @@ require("@nomiclabs/hardhat-etherscan");
 
 const { INFURA_API_KEY, PRIVATE_KEY, SCAN_API_KEY } = process.env;
 
+// Only attach a signing account when a private key is provided, so that local
+// tasks like `compile` and `test` work without secrets configured.
+const accounts = PRIVATE_KEY ? [`0x${PRIVATE_KEY}`] : [];
+
 module.exports = {
   solidity: {
     version: "0.8.4",
@@ -17,7 +21,7 @@ module.exports = {
       },
     },
   },
-  defaultNetwork: "mainnet",
+  defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
     localhost: {
@@ -27,49 +31,49 @@ module.exports = {
       url: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
       chainId: 1,
       gasPrice: 2000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
     sepolia: {
       url: `https://ethereum-sepolia-rpc.publicnode.com`,
       chainId: 11155111,
       gasPrice: 20000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
     holesky: {
       url: `https://endpoints.omniatech.io/v1/eth/holesky/public`,
       chainId: 17000,
       gasPrice: 20000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
     mainnet_bsc: {
       url: "https://bsc-dataseed.binance.org",
       chainId: 56,
       gasPrice: 20000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
     testnet_bsc: {
       url: "https://endpoints.omniatech.io/v1/bsc/testnet/public",
       chainId: 97,
       gasPrice: 20000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
     mainnet_polygon: {
       url: "https://matic-mainnet.chainstacklabs.com",
       chainId: 137,
       gasPrice: 2000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
     testnet_polygon: {
       url: "https://polygon-mumbai-bor-rpc.publicnode.com",
       chainId: 80001,
       gasPrice: 2000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
     base_sepolia: {
       url: "https://base-sepolia.blockpi.network/v1/rpc/public",
       chainId: 84532,
       gasPrice: 2000000000,
-      accounts: [`0x${PRIVATE_KEY}`],
+      accounts,
     },
   },
   etherscan: {
